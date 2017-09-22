@@ -5,7 +5,7 @@ sPam 2017 ------------------------------------------------------------- Janis, N
 Die Grundidee der Simulation ist, mittels einer Leiterschleife im Erdinneren (Kreisradius 
 cr, Strom i) das Magnetfeld an einem gegebenen Punkt P (Längen-, Breitengrad & Höhe) zu be-
 rechnen. Hierzu wird der Leiter in n Vektoren unterteilt und der Einfluss eines jedes auf 
-den Punk P berechnet. Resultat ist ein Vektor B [T]. Hieraus kann dann der Winkel zum Nor-
+den Punkt P berechnet. Resultat ist ein Vektor B [T]. Hieraus kann dann der Winkel zum Nor-
 malvektor am Punkt P mittels angle(...) herausgefunden werden.
 
 Nach unseren Überlegungen hat der Kreisstrom nur einen Einfluss auf die Stärke des Magnet-
@@ -96,7 +96,7 @@ def angle(b, lg, bg, h):
     phi = arccos(dot(b, rp) / norm(b) / norm(rp))
 
     # Winkel zum Normalvektor in Grad
-    return (phi / pi * 180)
+    return phi / pi * 180
     
 # Verarbeitung gemessener Daten
 def processData(data):
@@ -128,7 +128,7 @@ def computeErrorVector(mes_bs, sim_bs):
         res += (norm(mes_bs[k] - sim_bs[k])**2) / (norm(mes_bs[k])**2)
 
     # Faktor & Wurzel
-    return (1 / len(mes_bs) * sqrt(res))
+    return 1 / len(mes_bs) * sqrt(res)
 
 # Funktion um den Fehler des Winkels zu berechnen (Durchschnitt)
 def computeErrorNumeric(mes_ang, sim_ang):
@@ -140,7 +140,7 @@ def computeErrorNumeric(mes_ang, sim_ang):
         res += ((mes_ang[k] - sim_ang[k]) / mes_ang[k])**2
 
     # Faktor & Wurzel
-    return (1 / len(mes_ang) * sqrt(res)) 
+    return 1 / len(mes_ang) * sqrt(res)
 
 '''
 ================================= OPTIMIERUNG DES WINKELS =================================
